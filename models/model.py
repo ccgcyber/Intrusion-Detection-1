@@ -10,6 +10,7 @@ This class is expecting a dataframe
 import xgboost as xgb 
 import pandas as pd 
 from sklearn.model_selection import GridSearchCV as gcv 
+from sklearn.naive_bayes import GaussianNB
 
 
 class Model(): 
@@ -32,6 +33,11 @@ class Model():
 		num_round = 4
 		model = xgb.train(params,x_dtrain,num_round)
 		return model
+    
+   def gnbayes(x_train,y_train,x_test):
+      model=gnb.fit(x_train, y_train)
+      return model
+        
 
 
 
