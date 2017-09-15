@@ -10,8 +10,9 @@ This class is expecting a dataframe
 import xgboost as xgb 
 import pandas as pd 
 from sklearn.model_selection import GridSearchCV as gcv 
-from sklearn.naive_bayes import GaussianNB
-
+from sklearn.naive_bayes import MultinomialNB
+from sklearn import svm
+from sklearn.ensemble import RandomForestClassifier
 
 class Model(): 
 	def __init__(self,data,labelname): 
@@ -33,11 +34,25 @@ class Model():
 		num_round = 4
 		model = xgb.train(params,x_dtrain,num_round)
 		return model
-    
-   def gnbayes(x_train,y_train,x_test):
-      model=gnb.fit(x_train, y_train)
-      return model
-        
+
+
+	def mnbayes(x_train,y_train):
+		clf = MultinomialNB()
+		model=clf.fit(x_train,y_train)
+		return model
+
+	def svm(x_train ,y_train):
+		svm = SVC(kernel='rbf', random_state=0, gamma=0.10, C=10.0)
+		#for svm gamma and c need to be learnt using grid search
+		model=svm.fit(X_train, y_train)
+		return model
+
+	def randforest(x_train,y_train):
+		forest= RandomForestClassifier(criterion='entropy',max_depth=20,
+									   n_estimators = 100,random_state = 1,n_jobs = 2)
+		#parameters n_estimators ,max_depth need to be learnt
+		model=forest.fit(X_train, y_train)
+		return model
 
 
 
