@@ -50,9 +50,12 @@ class Model():
 		model=svm.fit(X_train, y_train)
 		return model
 
-	def randforest(x_train,y_train):
-		forest= RandomForestClassifier(criterion='entropy',max_depth=20,
-									   n_estimators = 100,random_state = 1,n_jobs = 2)
+	def randforest(x_train,y_train,params=None):
+                if params == None:
+                        params={'criterion':'entropy','max_depth':20,'n_estimators':100,
+                        'random_state':1,'n_jobs':2                               
+                        }
+		forest= RandomForestClassifier(params)
 		#parameters n_estimators ,max_depth need to be learnt
 		model=forest.fit(X_train, y_train)
 		return model
