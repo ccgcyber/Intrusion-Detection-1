@@ -41,8 +41,11 @@ class Model():
 		model=clf.fit(x_train,y_train)
 		return model
 
-	def svm(x_train ,y_train):
-		svm = SVC(kernel='rbf', random_state=0, gamma=0.10, C=10.0)
+	def svm(x_train ,y_train,params=None):
+		if params == None:
+			params={'kernel':'rbf','random_state':0,'gamma':0.1,
+			'C':10}
+		svm = SVC(params)
 		#for svm gamma and c need to be learnt using grid search
 		model=svm.fit(X_train, y_train)
 		return model
