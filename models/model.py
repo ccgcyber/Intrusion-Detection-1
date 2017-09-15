@@ -36,22 +36,23 @@ class Model():
 		return model
 
 
-	def mnbayes(x_train,y_train):
+	def mnbayes(self):
 		clf = MultinomialNB()
-		model=clf.fit(x_train,y_train)
+		model=clf.fit(self.x_train,self.y_train)
 		return model
-
-	def svm(x_train ,y_train):
-		svm = SVC(kernel='rbf', random_state=0, gamma=0.10, C=10.0)
+    def svm(self):
+        params={'kernel':'rbf', 'random_state':0,'gamma'=0.10, 'C'=10.0}
+        svm1 = SVC(params)
 		#for svm gamma and c need to be learnt using grid search
-		model=svm.fit(X_train, y_train)
+		model=svm1.fit(self.x_train, self.y_train)
 		return model
 
-	def randforest(x_train,y_train):
-		forest= RandomForestClassifier(criterion='entropy',max_depth=20,
-									   n_estimators = 100,random_state = 1,n_jobs = 2)
+	def randforest(self):
+        params={'criterion':'entropy','max_depth':20,'n_estimators' : 100,
+                'random_state' : 1,'n_jobs' : 2}
+        forest= RandomForestClassifier(params)
 		#parameters n_estimators ,max_depth need to be learnt
-		model=forest.fit(X_train, y_train)
+		model=forest.fit(self.x_train, self.y_train)
 		return model
 
 
