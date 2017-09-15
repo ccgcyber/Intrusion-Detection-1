@@ -24,9 +24,9 @@ class Model():
 		self.y_train = y_train
 		
 
-	def xgboost(x_train,y_train,x_test):
-		x_dtrain=xgb.DMatrix(data=x_train,labels=y_train)
-		x_dtest=xgb.DMatrix(data=x_test)
+	def xgboost(self,x_train,y_train,x_test):
+		x_dtrain=xgb.DMatrix(data=self.x_train,labels=self.y_train)
+		x_dtest=xgb.DMatrix(data=self.x_test)
 
 		params ={'eta': 1,'max_depth':2 ,
 		'objective':'binary:logistic'
