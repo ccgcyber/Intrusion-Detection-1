@@ -11,7 +11,7 @@ import xgboost as xgb
 import pandas as pd 
 from sklearn.model_selection import GridSearchCV as gcv 
 from sklearn.naive_bayes import MultinomialNB
-from sklearn import svm
+from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 
 class Model: 
@@ -33,28 +33,29 @@ class Model:
 		return model
 
 
-	def mnbayes(x_train,y_train):
+	def mnbayes(self,x_train,y_train):
 		clf = MultinomialNB()
 		model=clf.fit(x_train,y_train)
 		return model
 
-	def svm(x_train ,y_train,params=None):
+	def svm(self,x_train ,y_train,params=None):
 		if params == None:
 			params={'kernel':'rbf','random_state':0,'gamma':0.1,
 			'C':10}
-		svm = SVC(params)
+		svm = SVC()
+		svm.set_params(**params)
 		#for svm gamma and c need to be learnt using grid search
-		model=svm.fit(X_train, y_train)
+		model=svm.fit(x_train, y_train)
 		return model
 
-	def randforest(x_train,y_train,params=None):
-                if params == None:
-                        params={'criterion':'entropy','max_depth':20,'n_estimators':100,
-                        'random_state':1,'n_jobs':2                               
-                        }
-		forest= RandomForestClassifier(params)
+	def randforest(self,x_train,y_train,params=None):
+		if params == None:
+			params={'criterion':'entropy','max_depth':20,'n_estimators':100,
+		'random_state':1,'n_jobs':2}
+		forest= RandomForestClassifier()
+		forest.set_params(**params)
 		#parameters n_estimators ,max_depth need to be learnt
-		model=forest.fit(X_train, y_train)
+		model=forest.fit(x_train, y_train)
 		return model
 
 
