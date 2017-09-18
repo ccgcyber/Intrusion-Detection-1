@@ -17,7 +17,7 @@ class Cross_Valid:
 
 
 	def cross_val(self,x_train,y_train,cv=None):
-				scores = cross_val_score(self.model,self.x_train, self.y_train, cv)
-				print('cross validation scores %.3f +/- %.3f ' %(scores.mean(),scores.std()))
-				#when cv= none it will calculate 3 fold
+		scores = cross_val_score(self.model,self.x_train, self.y_train, cv)
+		print('cross validation scores %.3f +/- %.3f ' %(scores.mean(),scores.std()))
+		#when cv= none it will calculate 3 fold
 		return scores
