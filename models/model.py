@@ -4,7 +4,7 @@ and call models from here
 so in the jupyter notebook we load the dataset and
 do modelling from here.
 
-This class is expecting a dataframe 
+ 
 
 """
 import xgboost as xgb 
@@ -14,14 +14,11 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn import svm
 from sklearn.ensemble import RandomForestClassifier
 
-class Model(): 
-	def __init__(self,data,labelname): 
-		self.data = data 
-		ncol=
-		y_train=data.loc[:,labelname]
-		x_train = data[-y_train]
+class Model: 
+	def __init__(self,x_train,y_train,params=None): 
 		self.x_train = x_train
 		self.y_train = y_train
+		self.params=params
 		
 
 	def xgboost(self,x_train,y_train,x_test,params=None):
