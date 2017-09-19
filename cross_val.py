@@ -32,7 +32,7 @@ def k_fold_crossval(model,x_train,y_train,K=None):
 		cnf_matrix = confusion_matrix(Y_test, Y_pred)
 		f1= f1_score(Y_test, Y_pred)
 		f1score.append(f1)
-	return f1score
+	return f1score.mean()
 	
 
 
