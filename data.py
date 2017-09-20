@@ -12,8 +12,6 @@ def fetch_data(pathname,remove_duplicates=False):
 	df_train = pd.read_csv('session_1_data_train.csv')
 	df_test = pd.read_csv('session_1_data_test.csv')
 	
-	print('Datasets loaded :)' )
-	print ('The dimensions of the training dataset is {}'.format(df_train.shape))
 	assert df_train.shape,(494021,42)
 	labelname = 'label'
 	y_train=df_train.loc[:,labelname]
@@ -23,8 +21,6 @@ def fetch_data(pathname,remove_duplicates=False):
 
 	y_test = df_test.loc[:,labelname]
 	x_test = df_test.drop(labelname,axis=1,inplace=False)
-
-	print('The dimensions of test dataset is {}'.format(x_test.shape))
 	assert x_test.shape,(311028,42)
 
 	if remove_duplicates == True:
@@ -34,7 +30,16 @@ def fetch_data(pathname,remove_duplicates=False):
 		y_train=y_train[pd.DataFrame(~np.array(temp_train.duplicated()))[0]]
 		assert y_train.shape ,(145583,)
 
+		print('Datasets loaded :)' )
+		print ('The dimensions of the training dataset is {}'.format(x_train.shape))
+		print('The dimensions of test dataset is {}'.format(x_test.shape))
+
 		return x_train,y_train,x_test,y_test
 
 	else:
+		print('Datasets loaded :)' )
+		print ('The dimensions of the training dataset is {}'.format(x_train.shape))
+		print('The dimensions of test dataset is {}'.format(x_test.shape))
 		return x_train,y_train,x_test,y_test
+
+
