@@ -11,13 +11,6 @@ from sklearn.model_selection import KFold
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import f1_score
 
-def cross_val(self,model,x_train,y_train,c_fold=None):
-	scores = cross_val_score(self.model,self.x_train, self.y_train, cv=c_fold)
-	print('cross validation scores %.3f +/- %.3f ' %(scores.mean(),scores.std()))
-	#when cv= none it will calculate 3 fold
-	return scores
-
-
 def k_fold_crossval(model,x_train,y_train,K=None):
 	if K==None:
 		K=3
