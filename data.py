@@ -1,7 +1,7 @@
 import pandas as pd 
 import numpy as np
 import os
-from sklearn.preprocessing import MinMaxScalar 
+from sklearn.preprocessing import MinMaxScaler 
 """
 This script fetches the data from the 
 root path and returns x_train,y_train,x_test,y_test. 
@@ -81,7 +81,7 @@ def feature_engineering(x_train,do_normalization=True):
 		cont_features=list(set(cols).difference(set(cat_features)))
 
 		x_train=x_train.loc[:,cont_features]
-		scaler = MinMaxScalar()
+		scaler = MinMaxScaler()
 		norm_x_train=scaler.transform(x_train)
 		#normalize continous features
 		return norm_x_train
