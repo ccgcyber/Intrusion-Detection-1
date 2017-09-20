@@ -1,5 +1,6 @@
 import pandas as pd 
-import os 
+import numpy as np
+import os
 """
 This script fetches the data from the 
 root path and returns x_train,y_train,x_test,y_test. 
