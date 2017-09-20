@@ -82,7 +82,8 @@ def feature_engineering(x_train,do_normalization=True):
 
 		x_train=x_train.loc[:,cont_features]
 		scaler = MinMaxScaler()
-		norm_x_train=scaler.transform(x_train)
+
+		norm_x_train=scaler.fit_transform(x_train)
 		#normalize continous features
 		return norm_x_train
 
