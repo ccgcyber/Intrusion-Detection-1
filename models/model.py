@@ -35,7 +35,7 @@ class Model:
 
 	def mnbayes(self,x_train,y_train):
 		model = MultinomialNB()
-		
+		model.fit(x_train,x_test)		
 		return model
 
 	def svm(self,x_train ,y_train,params=None):
@@ -45,7 +45,7 @@ class Model:
 		svm = SVC()
 		svm.set_params(**params)
 		#for svm gamma and c need to be learnt using grid search
-		
+		svm.fit(x_train,y_train)		
 		return svm
 
 	def randforest(self,x_train,y_train,params=None):
@@ -55,7 +55,7 @@ class Model:
 		forest= RandomForestClassifier()
 		forest.set_params(**params)
 		#parameters n_estimators ,max_depth need to be learnt
-		
+		forest.fit(x_train,y_train)		
 		return forest
 
 
