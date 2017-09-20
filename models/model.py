@@ -35,7 +35,7 @@ class Model:
 
 	def mnbayes(self,x_train,y_train):
 		model = MultinomialNB()
-		model.fit(x_train,x_test)		
+		model.fit(x_train,y_train)		
 		return model
 
 	def svm(self,x_train ,y_train,params=None):

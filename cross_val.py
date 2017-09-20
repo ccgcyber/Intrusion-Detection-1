@@ -4,7 +4,7 @@ Created on Mon Sep 18 14:30:45 2017
 
 @author: Jeetu
 """
-
+import numpy as np
 from sklearn.model_selection import cross_val_score
 from sklearn.utils import shuffle
 from sklearn.model_selection import KFold
@@ -32,7 +32,7 @@ def k_fold_crossval(model,x_train,y_train,K=None):
 		cnf_matrix = confusion_matrix(Y_test, Y_pred)
 		f1= f1_score(Y_test, Y_pred)
 		f1score.append(f1)
-	return f1score.mean()
+	return np.mean(f1score)
 	
 
 
