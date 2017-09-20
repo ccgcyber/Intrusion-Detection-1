@@ -28,9 +28,10 @@ def fetch_data(pathname,remove_duplicates=False):
 	assert x_test.shape,(311028,42)
 
 	if remove_duplicates == True:
-		x_train=x_train[pd.DataFrame(~np.array( x_train.duplicated()))[0]]
+		temp_train=x_train.copy()
+		x_train=x_train[pd.DataFrame(~np.array( temp_train.duplicated()))[0]]
 		assert x_train.shape,(145583,41)
-		y_train=y_train[pd.DataFrame(~np.array( x_train.duplicated()))[0]]
+		y_train=y_train[pd.DataFrame(~np.array(temp_train.duplicated()))[0]]
 		assert y_train.shape ,(145583,)
 
 		return x_train,y_train,x_test,y_test
