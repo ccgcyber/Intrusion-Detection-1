@@ -43,3 +43,30 @@ def fetch_data(pathname,remove_duplicates=False):
 		return x_train,y_train,x_test,y_test
 
 
+def feature_engineering(x_train): 
+	# check always that x_train.shape[0] does not change throughout
+	# feature engineering on the training data
+
+	def bin_service(x):
+		if x in {'http','private','smtp','domain_u','other','ftp_data'}:
+			return x
+		else:
+			return 'others'
+
+	def bin_flag(x):
+		if x in {'SF','S0','REJ'}:
+			return x
+		else:
+			return 'others'
+
+
+	x_train['service']=x_train['service'].apply(lambda x: bin_service(x))
+	x_train=pd.get_dummies(x_train,columns=['service'],prefix='service',drop_first=True)
+	x_train['flag']=x_train['flag'].apply(lambda x: bin_flag(x))
+	x_train=pd.get_dummies(x_train,columns=['flag'],prefix='flag',drop_first=True)
+
+
+	return x_train 
+
+
+
