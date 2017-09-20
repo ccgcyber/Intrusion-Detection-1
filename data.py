@@ -1,6 +1,7 @@
 import pandas as pd 
 import numpy as np
 import os
+from sklearn.preprocessing import MinMaxScalar 
 """
 This script fetches the data from the 
 root path and returns x_train,y_train,x_test,y_test. 
@@ -43,9 +44,11 @@ def fetch_data(pathname,remove_duplicates=False):
 		return x_train,y_train,x_test,y_test
 
 
-def feature_engineering(x_train): 
+def feature_engineering(x_train,do_normalization=True): 
 	# check always that x_train.shape[0] does not change throughout
 	# feature engineering on the training data
+
+	#categorical features
 
 	def bin_service(x):
 		if x in {'http','private','smtp','domain_u','other','ftp_data'}:
@@ -62,11 +65,30 @@ def feature_engineering(x_train):
 
 	x_train['service']=x_train['service'].apply(lambda x: bin_service(x))
 	x_train=pd.get_dummies(x_train,columns=['service'],prefix='service',drop_first=True)
+	
 	x_train['flag']=x_train['flag'].apply(lambda x: bin_flag(x))
 	x_train=pd.get_dummies(x_train,columns=['flag'],prefix='flag',drop_first=True)
 
+	#continous features 
 
-	return x_train 
+	features_to_be_removed=['num_root','su_attempted','num_outbound_cmds','is_host_login']
+	x_train.drop(features_to_be_removed,axis=1,inplace=True)
+
+
+	if do_normalization == True: 
+		cat_features = ['protocol_type','service','flag','land','logged_in','is_host_login','is_guest_login']
+		cols=list(x_train.axes[1].values)
+		cont_features=list(set(cols).difference(set(cat_features)))
+
+		x_train=x_train.loc[:,cont_features]
+		scaler = MinMaxScalar()
+		norm_x_train=scaler.transform(x_train)
+		#normalize continous features
+		return norm_x_train
+
+
+	else:
+		return x_train 
 
 
 
