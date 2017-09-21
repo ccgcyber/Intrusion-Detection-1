@@ -5,20 +5,18 @@ from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 
 
-def paralearn(name,model,x_train,y_tain):
+def paralearn(name,model,x_train,y_train,nfolds=3):
     if name=='svm':
         Cs = [0.001, 0.01, 0.1, 1, 10]
         gammas = [0.001, 0.01, 0.1, 1]
         param_grid = {'C': Cs, 'gamma' : gammas}
-        svm = SVC('kernel':'rbf','random_state':0)
-        svm.set_params(**params)
-        grid_search = GridSearchCV(estimator=svm, param_grid, cv=nfolds)
+        grid_search = GridSearchCV(SVC(kernel='rbf'), param_grid, cv=nfolds)
         grid_search.fit(x_train,y_train)
         grid_search.best_params_
         return grid_search.best_params_
     elif name=='randforest':
-        model=RandomForestClassifier('criterion':'entropy','max_depth':20,
-                                     'random_state':12345,'n_jobs':2)
+        model=RandomForestClassifier(criterion='entropy',max_depth=20,
+                                     random_state=12345,n_jobs=2)
         param_grid = {
                 'n_estimators': [200, 700],
                 'max_features': ['auto', 'sqrt', 'log2']
