@@ -17,8 +17,8 @@ def k_fold_crossval(model,x_train,y_train,K=None):
 	f1score=[]   
 	kf = KFold(n_splits = K, shuffle = True)
 	for result in kf.split(y_train):
-		X_train,Y_train= x_train.ix[result[0]],y_train.ix[result[0]]
-		X_test,Y_test = x_train.ix[result[1]],y_train.ix[result[1]]
+		X_train,Y_train= x_train.iloc[result[0]],y_train.iloc[result[0]]
+		X_test,Y_test = x_train.iloc[result[1]],y_train.iloc[result[1]]
 		   
 		model.fit(X_train,Y_train)    
 		Y_pred=model.predict(X_test)
