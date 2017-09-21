@@ -23,6 +23,13 @@ def fetch_data(pathname,remove_duplicates=False,binary=True):
 	y_test = df_test.loc[:,labelname]
 	x_test = df_test.drop(labelname,axis=1,inplace=False)
 	assert x_test.shape,(311028,42)
+
+	def binarize(x): 
+		if x =='normal.':
+			return 0 
+		else:
+			return 1
+
        
 	if remove_duplicates == True:
 		temp_train=x_train.copy()
@@ -95,12 +102,6 @@ def feature_engineering(x_train,do_normalization=True):
 	else:
 		return x_train 
 
-def binarize(x): 
-	if x =='normal.'
-		return 0 
-
-	else:
-		return 1
 
 
 
