@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import os
 from sklearn.preprocessing import MinMaxScaler 
+import time 
 """
 This script fetches the data from the 
 root path and returns x_train,y_train,x_test,y_test. 
@@ -9,6 +10,7 @@ root path and returns x_train,y_train,x_test,y_test.
 pathname is the path to the root directory of the project 
 """
 def fetch_data(pathname,remove_duplicates=False,binary=True):
+	start = time.time()
 	path=(os.path.join(pathname,'data'))
 
 	df_train = pd.read_csv(os.path.join(path,'session_1_data_train.csv'))
@@ -42,6 +44,7 @@ def fetch_data(pathname,remove_duplicates=False,binary=True):
 		print('Datasets loaded :)' )
 		print ('The dimensions of the training dataset is {}'.format(x_train.shape))
 		print('The dimensions of test dataset is {}'.format(x_test.shape))
+		print('The taken to load data is {}'.format(time.time()-start))
 		if binary == True:
 			y_train=y_train.apply(lambda x: binarize(x))
 
@@ -52,6 +55,7 @@ def fetch_data(pathname,remove_duplicates=False,binary=True):
 		print('Datasets loaded :)' )
 		print ('The dimensions of the training dataset is {}'.format(x_train.shape))
 		print('The dimensions of test dataset is {}'.format(x_test.shape))
+		print('The taken to do load data is {}'.format(time.time()-start))
 		if binary == True:
 			y_train=y_train.apply(lambda x: binarize(x))
 		return x_train,y_train,x_test,y_test
