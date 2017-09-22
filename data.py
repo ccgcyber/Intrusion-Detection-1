@@ -9,9 +9,10 @@ root path and returns x_train,y_train,x_test,y_test.
 pathname is the path to the root directory of the project 
 """
 def fetch_data(pathname,remove_duplicates=False,binary=True):
-	os.chdir(os.path.join(pathname,'data'))
-	df_train = pd.read_csv('session_1_data_train.csv')
-	df_test = pd.read_csv('session_1_data_test.csv')
+	path=(os.path.join(pathname,'data'))
+
+	df_train = pd.read_csv(os.path.join(path,'session_1_data_train.csv'))
+	df_test = pd.read_csv(os.path.join(path,'session_1_data_test.csv'))
 	
 	assert df_train.shape,(494021,42)
 	labelname = 'label'
