@@ -19,7 +19,7 @@ class Model:
 			}
 		num_round = 4
 		model = xgb.train(params,x_dtrain,num_round)
-		return model,x_dtest
+		return model,x_dtrain,x_dtest
 			
 
 

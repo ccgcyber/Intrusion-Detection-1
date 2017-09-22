@@ -99,7 +99,7 @@ def feature_engineering(x_train,do_normalization=True):
 		cols=list(x_train.axes[1].values)
 		cont_features=list(set(cols).difference(set(cat_features)))
 		scaler = MinMaxScaler()
-		print (cont_features)
+		#print (cont_features)
 
 		x_train.loc[:,cont_features]=scaler.fit_transform(x_train.loc[:,cont_features])
 		# norm_x_train=scaler.fit_transform(temp_x_train_norm)
