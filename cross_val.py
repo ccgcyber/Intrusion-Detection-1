@@ -1,15 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Sep 18 14:30:45 2017
-
-@author: Jeetu
-"""
-import numpy as np
-from sklearn.model_selection import cross_val_score
-from sklearn.utils import shuffle
 from sklearn.model_selection import KFold
-from sklearn.metrics import confusion_matrix
 from sklearn.metrics import f1_score
+import numpy as np
 
 def k_fold_crossval(model,x_train,y_train,K=None):
 	if K==None:
@@ -22,7 +13,6 @@ def k_fold_crossval(model,x_train,y_train,K=None):
 		   
 		model.fit(X_train,Y_train)    
 		Y_pred=model.predict(X_test)
-		cnf_matrix = confusion_matrix(Y_test, Y_pred)
 		f1= f1_score(Y_test, Y_pred)
 		f1score.append(f1)
 	return np.mean(f1score)
