@@ -1,17 +1,6 @@
-"""
-Thought is to import this file into a jupyter notebook 
-and call models from here 
-so in the jupyter notebook we load the dataset and
-do modelling from here.
-
- 
-
-"""
 import xgboost as xgb 
-import pandas as pd 
-from sklearn.model_selection import GridSearchCV as gcv 
 from sklearn.naive_bayes import MultinomialNB
-from sklearn.svm import SVC
+from sklearn.svm import LinearSVC
 from sklearn.ensemble import RandomForestClassifier
 
 class Model: 
@@ -21,16 +10,17 @@ class Model:
 		self.params=params
 		
 
-	def xgboost(self,x_train,y_train,x_test,params=None):
-		x_dtrain=xgb.DMatrix(data=self.x_train,labels=self.y_train)
-		x_dtest=xgb.DMatrix(data=self.x_test)
+	def xgboost(self,x_train,y_train,x_test,params=None):		
+		x_dtrain=xgb.DMatrix(data=self.x_train,label=self.y_train)
+		x_dtest=xgb.DMatrix(x_test)
 		if params == None :
-			params ={'eta': 1,'max_depth':2 ,
+			params ={'eta': 1,'max_depth':5 ,'multi':'softmax',
 			'objective':'binary:logistic'
 			}
 		num_round = 4
 		model = xgb.train(params,x_dtrain,num_round)
-		return model
+		return model,x_dtest
+			
 
 
 	def mnbayes(self,x_train,y_train):
@@ -38,25 +28,26 @@ class Model:
 		model.fit(x_train,y_train)		
 		return model
 
-	def svm(self,x_train ,y_train,params=None):
+	def svm(self,x_train ,y_train,params=None):		
 		if params == None:
-			params={'kernel':'rbf','random_state':0,'gamma':0.1,
-			'C':10}
-		svm = SVC()
-		svm.set_params(**params)
-		#for svm gamma and c need to be learnt using grid search
+			params={'random_state':0,
+			'C':10,'loss':'hinge'}
+		svm = LinearSVC()
+		svm.set_params(**params)        
+		#for svm gamma and c need to be learnt using grid search		 
 		svm.fit(x_train,y_train)		
-		return svm
+		return svm		
 
 	def randforest(self,x_train,y_train,params=None):
 		if params == None:
-			params={'criterion':'entropy','max_depth':20,'n_estimators':100,
-		'random_state':12345,'n_jobs':2}
+			params={'criterion':'entropy','max_depth':20,'n_estimators':200,
+				'random_state':12345,'n_jobs':2}
 		forest= RandomForestClassifier()
 		forest.set_params(**params)
 		#parameters n_estimators ,max_depth need to be learnt
 		forest.fit(x_train,y_train)		
 		return forest
+		
 
 
 
