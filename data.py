@@ -44,7 +44,7 @@ def fetch_data(pathname,remove_duplicates=False,binary=True):
 		print('Datasets loaded :)' )
 		print ('The dimensions of the training dataset is {}'.format(x_train.shape))
 		print('The dimensions of test dataset is {}'.format(x_test.shape))
-		print('The taken to load data is {}'.format(time.time()-start))
+		print('The taken to load data is {:.2f} secs'.format(time.time()-start))
 		if binary == True:
 			y_train=y_train.apply(lambda x: binarize(x))
 
@@ -86,6 +86,8 @@ def feature_engineering(x_train,do_normalization=True):
 	x_train['flag']=x_train['flag'].apply(lambda x: bin_flag(x))
 	x_train=pd.get_dummies(x_train,columns=['flag'],prefix='flag',drop_first=True)
 
+	x_train=pd.get_dummies(x_train,columns=['protocol_type'],prefix='protocol_type',drop_first=True)
+
 	#continous features 
 
 	features_to_be_removed=['num_root','su_attempted','num_outbound_cmds','is_host_login']
@@ -96,13 +98,15 @@ def feature_engineering(x_train,do_normalization=True):
 		cat_features = ['protocol_type','service','flag','land','logged_in','is_host_login','is_guest_login']
 		cols=list(x_train.axes[1].values)
 		cont_features=list(set(cols).difference(set(cat_features)))
-
-		x_train=x_train.loc[:,cont_features]
 		scaler = MinMaxScaler()
+		print (cont_features)
 
-		norm_x_train=scaler.fit_transform(x_train)
-		#normalize continous features
-		return pd.DataFrame(norm_x_train,columns=cont_features)
+		x_train.loc[:,cont_features]=scaler.fit_transform(x_train.loc[:,cont_features])
+		# norm_x_train=scaler.fit_transform(temp_x_train_norm)
+		# #normalize continous features
+
+
+		return x_train
 
 	else:
 		return x_train 
