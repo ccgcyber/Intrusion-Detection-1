@@ -10,15 +10,17 @@ class Model:
 		self.params=params
 		
 
-	def xgboost(self,x_train,y_train,x_test,params=None):		
+	def xgboost(self,x_train,y_train,x_test,params=None,cv=True):		
 		x_dtrain=xgb.DMatrix(data=self.x_train,label=self.y_train)
 		x_dtest=xgb.DMatrix(x_test)
 		if params == None :
 			params ={'eta': 1,'max_depth':5 ,'multi':'softmax',
 			'objective':'binary:logistic'
 			}
-		num_round = 4
+		num_round = 10
 		model = xgb.train(params,x_dtrain,num_round)
+
+		xgb.cv(params,x_dtrain,num_round,nfold=5,metrics={'auc'},seed=12345,verbose_eval=True)
 		return model,x_dtrain,x_dtest
 			
 
