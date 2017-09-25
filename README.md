@@ -4,3 +4,5 @@ This task for this project was to build a network intrusion detector,a predictiv
 
 
 A basic Flask API was also created to put this system in production.
+
+This task in inspired by KDD CUP 1999 competition.
