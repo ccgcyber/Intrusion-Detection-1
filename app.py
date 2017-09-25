@@ -31,7 +31,6 @@ def predict_multi():
 	
 	return 'predictions={}'.format(predictions[0])
 
-
 if __name__=='__main__':
 
 	model=joblib.load(open('randomforest.pkl','rb'))
