@@ -16,7 +16,7 @@ def reformat_json(data):
 
 	df_test=pd.concat([test_df,df_sample])
 	df_test.reset_index()
-	print (df_sample)
+	#print (df_sample)
 
 	# df_test.drop(['index','level_0'],axis=1,inplace=False)
 

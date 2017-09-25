@@ -35,7 +35,7 @@ if __name__=='__main__':
 
 	model=joblib.load(open('randomforest.pkl','rb'))
 	model_multi=joblib.load(open('multirandforest.pkl','rb'))
-	app.run(port = 9999,debug= True)
+	app.run(host="0.0.0.0",port = 9999,debug= True)
 
 
 
