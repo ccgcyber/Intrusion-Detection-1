@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 from collections import Counter
 from imblearn.over_sampling import RandomOverSampler as ROS
@@ -20,7 +21,8 @@ class Sampling:
     sampled_X,sampled_Y = sampler.fit_sample(X_train,Y_train.values.ravel())
     sampled_X = pd.DataFrame(sampled_X)
     sampled_Y = pd.DataFrame(sampled_Y)
-    data_for_modelling = pd.concat([sampled_X,sampled_Y],axis=1)
+    data_for_modelling = np.concatenate([sampled_X,sampled_Y],axis=1)
+    data_for_modelling = pd.DataFrame(data_for_modelling)
     data_for_modelling.columns = l
     return data_for_modelling
 
@@ -29,11 +31,12 @@ class Sampling:
     Y_train = pd.DataFrame(self.Y_t)
     comb = pd.concat([X_train,Y_train],axis=1)
     l = list(comb)
-    sampler = SMOTE(random_state=42)
+    sampler = SMOTE(kind="borderline1",ratio=1)
     sampled_X,sampled_Y = sampler.fit_sample(X_train,Y_train.values.ravel())
     sampled_X = pd.DataFrame(sampled_X)
     sampled_Y = pd.DataFrame(sampled_Y)
-    data_for_modelling = pd.concat([sampled_X,sampled_Y],axis=1)
+    data_for_modelling = np.concatenate([sampled_X,sampled_Y],axis=1)
+    data_for_modelling = pd.DataFrame(data_for_modelling)
     data_for_modelling.columns = l
     return data_for_modelling
 
@@ -46,7 +49,8 @@ class Sampling:
     sampled_X,sampled_Y = sampler.fit_sample(X_train,Y_train.values.ravel())
     sampled_X = pd.DataFrame(sampled_X)
     sampled_Y = pd.DataFrame(sampled_Y)
-    data_for_modelling = pd.concat([sampled_X,sampled_Y],axis=1)
+    data_for_modelling = np.concatenate([sampled_X,sampled_Y],axis=1)
+    data_for_modelling = pd.DataFrame(data_for_modelling)
     data_for_modelling.columns = l
     return data_for_modelling
 
