@@ -42,7 +42,7 @@ class Model:
 
 	def randforest(self,x_train,y_train,params=None):
 		if params == None:
-			params={'criterion':'entropy','max_depth':20,'n_estimators':200,
+			params={'criterion':'entropy','max_depth':20,'n_estimators':50,
 				'random_state':12345,'n_jobs':2}
 		forest= RandomForestClassifier()
 		forest.set_params(**params)
