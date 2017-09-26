@@ -11,7 +11,7 @@ converts the test json into a modified test dataframe.
 def reformat_json(data):
 	df_sample=pd.read_csv('df_sample.csv')
 	df_sample=df_sample.drop(['Unnamed: 0'],axis=1,inplace=False)
-	test_df=pd.DataFrame(json.loads(data),index=[0])
+	test_df=pd.DataFrame(json.loads(data))
 	# print (test_df)
 
 	df_test=pd.concat([test_df,df_sample])

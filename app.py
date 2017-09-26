@@ -28,7 +28,7 @@ def predict_new():
 	
 
 
-	return predictions
+	return 'predictions={}'.format(predictions[0])
 
 if __name__=='__main__':
 
