@@ -11,28 +11,31 @@ app=Flask(__name__)
 def something():
 	return ('Hey There')
 
-@app.route('/api',methods=['POST'])
-def predict_new():
+@app.route('/apibin',methods=['POST'])
+def predict_bin():
 	print ('Hello World')
-	data =json.dumps((request.json))
-
-	
-	
+	data =json.dumps((request.json))	
 	temp_df=reformat_json(data)
 	# print (temp_df)
-
-
-
 	predictions=model.predict(temp_df)
-	# print('predictions ={}'.format(predictions[0]))
 	
-
-
 	return 'predictions={}'.format(predictions[0])
+
+@app.route('/apimulti',methods=['POST'])
+def predict_multi():
+	print ('Hello World')
+	data =json.dumps((request.json))	
+	temp_df=reformat_json(data)
+	# print (temp_df)
+	predictions=model_multi.predict(temp_df)
+	
+	return 'predictions={}'.format(predictions[0])
+
 
 if __name__=='__main__':
 
 	model=joblib.load(open('randomforest.pkl','rb'))
+	model_multi=joblib.load(open('multirandforest.pkl','rb'))
 	app.run(port = 9999,debug= True)
 
 
