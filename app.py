@@ -11,7 +11,7 @@ app=Flask(__name__)
 def something():
 	return ('Hey There')
 
-@app.route('/apibin',methods=['POST'])
+@app.route('/api/bin',methods=['POST'])
 def predict_bin():
 	print ('Hello World')
 	data =json.dumps((request.json))	
@@ -21,7 +21,7 @@ def predict_bin():
 	
 	return 'predictions={}'.format(predictions[0])
 
-@app.route('/apimulti',methods=['POST'])
+@app.route('/api/mlt',methods=['POST'])
 def predict_multi():
 	print ('Hello World')
 	data =json.dumps((request.json))	
@@ -31,12 +31,11 @@ def predict_multi():
 	
 	return 'predictions={}'.format(predictions[0])
 
-
 if __name__=='__main__':
 
 	model=joblib.load(open('randomforest.pkl','rb'))
 	model_multi=joblib.load(open('multirandforest.pkl','rb'))
-	app.run(port = 9999,debug= True)
+	app.run(host="0.0.0.0",port = 9999,debug= True)
 
 
 
