@@ -39,6 +39,6 @@ def predict_multi():
 
 if __name__=='__main__':
 
-	model=joblib.load(open('randomforest.pkl','rb'))
-	model_multi=joblib.load(open('multirandforest.pkl','rb'))
+	model=joblib.load(open('saved_models/randomforest.pkl','rb'))
+	model_multi=joblib.load(open('saved_models/multirandforest.pkl','rb'))
 	app.run(host="0.0.0.0",port = 9999,debug= True)
